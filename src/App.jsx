@@ -10,11 +10,14 @@ import CourseDetails from "./pages/CousrseDetails/CourseDetails";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import NotFound from "./pages/NotFound/NotFound";
+import AboutPage from "./pages/about/AboutPage";
 
 // Lazy load heavy components for code splitting
 const CoursePlayer = lazy(() => import("./pages/CoursePlayer/CoursePlayer"));
 const StudentDashboard = lazy(() => import("./pages/student/StudentDashboard"));
-const AdminDashboard = lazy(() => import("./pages/admin/components/AdminDashboard"));
+const AdminDashboard = lazy(
+  () => import("./pages/admin/components/AdminDashboard"),
+);
 const AdminOverview = lazy(() => import("./pages/admin/pages/AdminOverview"));
 const ManageCourses = lazy(() => import("./pages/admin/pages/ManageCourses"));
 const Enrollments = lazy(() => import("./pages/admin/pages/Enrollments"));
@@ -28,8 +31,8 @@ const Profile = lazy(() => import("./pages/Profile/Profile"));
 
 // Loading component
 const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <span className="loading loading-spinner loading-lg"></span>
+  <div className='flex items-center justify-center min-h-screen'>
+    <span className='loading loading-spinner loading-lg'></span>
   </div>
 );
 
@@ -40,15 +43,16 @@ export default function App() {
         {/* Main public layout */}
         <Route element={<MainLayout />}>
           {/* public */}
-          <Route path="/" element={<Home />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/courses/:id" element={<CourseDetails />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/courses' element={<Courses />} />
+          <Route path='/courses/:id' element={<CourseDetails />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/about' element={<AboutPage />} />
 
           {/* account profile (protected) */}
           <Route
-            path="/profile"
+            path='/profile'
             element={
               <ProtectedRoute>
                 <Suspense fallback={<LoadingSpinner />}>
@@ -60,7 +64,7 @@ export default function App() {
 
           {/* student dashboard (protected) */}
           <Route
-            path="/student"
+            path='/student'
             element={
               <ProtectedRoute>
                 <Suspense fallback={<LoadingSpinner />}>
@@ -72,7 +76,7 @@ export default function App() {
 
           {/* course player (protected) */}
           <Route
-            path="/courses/:id/player"
+            path='/courses/:id/player'
             element={
               <ProtectedRoute>
                 <Suspense fallback={<LoadingSpinner />}>
@@ -84,7 +88,7 @@ export default function App() {
 
           {/* admin dashboard with nested routes (protected) */}
           <Route
-            path="/admin"
+            path='/admin'
             element={
               <ProtectedRoute>
                 <Suspense fallback={<LoadingSpinner />}>
@@ -94,19 +98,82 @@ export default function App() {
             }
           >
             {/* nested admin pages */}
-            <Route index element={<Suspense fallback={<LoadingSpinner />}><AdminOverview /></Suspense>} />
-            <Route path="courses" element={<Suspense fallback={<LoadingSpinner />}><ManageCourses /></Suspense>} />
-            <Route path="courses/edit/:id" element={<Suspense fallback={<LoadingSpinner />}><EditCourse /></Suspense>} />
-            <Route path="courses/create" element={<Suspense fallback={<LoadingSpinner />}><CreateCourse /></Suspense>} />
-            <Route path="video-classes" element={<Suspense fallback={<LoadingSpinner />}><VideoClasses /></Suspense>} />
-            <Route path="enrollments" element={<Suspense fallback={<LoadingSpinner />}><Enrollments /></Suspense>} />
-            <Route path="assignments" element={<Suspense fallback={<LoadingSpinner />}><Assignments /></Suspense>} />
-            <Route path="analytics" element={<Suspense fallback={<LoadingSpinner />}><Analytics /></Suspense>} />
-            <Route path="users" element={<Suspense fallback={<LoadingSpinner />}><ManageUsers /></Suspense>} />
+            <Route
+              index
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <AdminOverview />
+                </Suspense>
+              }
+            />
+            <Route
+              path='courses'
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <ManageCourses />
+                </Suspense>
+              }
+            />
+            <Route
+              path='courses/edit/:id'
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <EditCourse />
+                </Suspense>
+              }
+            />
+            <Route
+              path='courses/create'
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <CreateCourse />
+                </Suspense>
+              }
+            />
+            <Route
+              path='video-classes'
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <VideoClasses />
+                </Suspense>
+              }
+            />
+            <Route
+              path='enrollments'
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Enrollments />
+                </Suspense>
+              }
+            />
+            <Route
+              path='assignments'
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Assignments />
+                </Suspense>
+              }
+            />
+            <Route
+              path='analytics'
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Analytics />
+                </Suspense>
+              }
+            />
+            <Route
+              path='users'
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <ManageUsers />
+                </Suspense>
+              }
+            />
           </Route>
 
           {/* 404 */}
-          <Route path="*" element={<NotFound />} />
+          <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
