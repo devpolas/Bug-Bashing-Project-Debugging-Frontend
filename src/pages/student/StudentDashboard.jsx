@@ -258,7 +258,16 @@ export default function StudentDashboard() {
                                             </div>
                                             <div className="text-right">
                                                 <p className="text-2xl sm:text-3xl font-bold text-primary">
-                                                    {Math.round((enrollment.progress?.completedLessons?.length / (stats?.courseData?.syllabus?.reduce((acc, m) => acc + (m.lessons?.length || 0), 0))) * 100)}%
+                                                    {(() => {
+                                                        const totalLessons = stats?.courseData?.syllabus?.reduce(
+                                                            (acc, module) => acc + (module.lessons?.length || 0),
+                                                            0
+                                                        ) || 0;
+                                                        const completedLessons = enrollment.progress?.completedLessons?.length || 0;
+                                                        return totalLessons > 0
+                                                            ? Math.round((completedLessons / totalLessons) * 100)
+                                                            : 0;
+                                                    })()}%
                                                 </p>
                                             </div>
                                         </div>
