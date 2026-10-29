@@ -5,9 +5,6 @@ Video link: https://drive.google.com/file/d/1vjMrBxr0-7xqjxMX2EBEBw30D_av1pOu/vi
 
 A modern E-learning platform frontend built with React, Redux Toolkit, and Tailwind CSS.
 
-Admin email: admin@coursemaster.com
-Pass: admin123
-
 ## Project Name & Description
 
 **CourseMaster** is a full-featured E-learning platform where students can browse, purchase, and consume courses. The frontend provides an intuitive interface for students to enroll in courses, watch video lectures, complete assignments, and take quizzes. Administrators can manage courses, track enrollments, review assignments, and view analytics through a dedicated admin dashboard.
@@ -28,7 +25,7 @@ This is the frontend application of the CourseMaster platform, built with modern
 1. Clone the repository
 2. Navigate to the frontend directory:
    ```bash
-   cd course-master-frontend
+   cd courseMaster_frontEnd
    ```
 
 3. Install dependencies:
@@ -55,12 +52,12 @@ Create a `.env` file in the root directory with the following variables (see `.e
 ```env
 # Backend API Base URL
 VITE_API_BASE_URL=http://localhost:5000/api
-# For production, use your deployed backend URL:
-# VITE_API_BASE_URL=http://localhost:5000/api/api
+# For production, use your deployed backend's /api base path:
+# VITE_API_BASE_URL=https://your-backend-domain.example/api
 ```
 
 **Required Variables:**
-- `VITE_API_BASE_URL` - The base URL of the backend API (required)
+- `VITE_API_BASE_URL` - The backend API base URL (defaults to `http://localhost:5000/api` locally). Use your deployed backend URL followed by `/api` in production.
 
 ## Project Structure
 
